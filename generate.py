@@ -65,6 +65,40 @@ def generate_codesystem():
     logger.info(f"Version:\t\t{stelsel.version}")
     logger.info(f"Concept count:\t{stelsel.count}")
 
+    # Define CodeSystem properties
+    stelsel.property = [
+        codesystem.CodeSystemProperty(**{
+            'code' : 'parent',
+            'type' : 'code',
+            'description' : 'Contains identifiers for superclasses.'
+        }),
+        codesystem.CodeSystemProperty(**{
+            'code' : 'child',
+            'type' : 'code',
+            'description' : 'Contains identifiers for subclasses.'
+        }),
+        codesystem.CodeSystemProperty(**{
+            'code' : 'definition',
+            'type' : 'string',
+            'description' : 'Contains the definition value of the ontology.'
+        }),
+        codesystem.CodeSystemProperty(**{
+            'code' : 'xref',
+            'type' : 'string',
+            'description' : 'Contains xref values.'
+        }),
+        codesystem.CodeSystemProperty(**{
+            'code' : 'subset',
+            'type' : 'string',
+            'description' : 'Contains the subsets that the concept is part of.'
+        }),
+        codesystem.CodeSystemProperty(**{
+            'code' : 'inactive',
+            'type' : 'boolean',
+            'description' : 'True if the code is marked as obsolete, false in any other case.'
+        })
+    ]
+
     # Start adding concepts to the CodeSystem
     logger.info("Concepten toevoegen aan CodeSystem")
     for concept in tqdm.tqdm(hpo.terms()):
