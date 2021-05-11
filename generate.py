@@ -23,7 +23,6 @@ def generate_codesystem():
     codesystem_url          = "http://purl.obolibrary.org/obo/hp.owl"
     codesystem_experimental = True
     download                = True
-    filename_output         = "hp.owl.json"
 
     # Initialize logger and start generating resource
     logging.basicConfig(
@@ -152,10 +151,14 @@ def generate_codesystem():
 
     # Write to file
     logger.info(f"{len(stelsel.concept)} concepten toegevoegd aan het CodeSystem. Exporteren naar JSON.")
-    logger.info("Voltooid - schrijf CodeSystem naar bestand")
-    with open(filename_output, 'w') as outfile:
-        outfile.write(json.dumps(stelsel.dict(),indent=2,default=str, ensure_ascii=False))
-    logger.info(f"CodeSystem geschreven naar {filename_output}.")
+    logger.info("Voltooid - return CodeSystem")
+    return json.dumps(stelsel.dict(),indent=2,default=str, ensure_ascii=False)
 
 if __name__ == '__main__':
-    generate_codesystem()
+    filename_output = "hp.owl.json"
+
+    output = generate_codesystem()
+    
+    with open(filename_output, 'w') as outfile:
+        outfile.write(output)
+        print(f"Wrote resource to {filename_output}. Exiting.")
