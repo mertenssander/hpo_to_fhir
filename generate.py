@@ -78,11 +78,6 @@ def generate_codesystem():
             'description' : 'Contains identifiers for subclasses.'
         }),
         codesystem.CodeSystemProperty(**{
-            'code' : 'definition',
-            'type' : 'string',
-            'description' : 'Contains the definition value of the ontology.'
-        }),
-        codesystem.CodeSystemProperty(**{
             'code' : 'xref',
             'type' : 'string',
             'description' : 'Contains xref values.'
@@ -142,10 +137,7 @@ def generate_codesystem():
 
         ## Definition
         if concept.definition:
-            _properties.append(codesystem.CodeSystemConceptProperty(**{
-                'code' : 'definition',
-                'valueString' : concept.definition
-            }))
+            _concept.definition = concept.definition
 
         ## Xrefs
         for xref in concept.xrefs:
